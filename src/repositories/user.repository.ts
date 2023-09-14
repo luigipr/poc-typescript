@@ -11,7 +11,7 @@ export async function Create (name :string, email:string, password:string) {
 }
     
 export async function Update(name :string, email:string, password:string, id: number) {
-    return await db.query(`UPDATE produtos SET (name, email, password) WHERE id= $5;`)
+    return await db.query(`UPDATE produtos SET (name = $1, email = $2, password = $3) WHERE id= $4;`, [name, email, password, id])
 }
 
 export async function Delete(id: number) {

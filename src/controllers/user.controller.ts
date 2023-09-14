@@ -19,17 +19,25 @@ async function createUser(req: Request, res: Response) {
 async function updateUser(req: Request, res: Response) {
   const {name, email, password} = req.body as User
   const {id} = req.params
-  Number(id)
-  await userRepository.Update(name, email, password, id) {
-    
-  };
+  const userId = Number(id)
+  await userRepository.Update(name, email, password, userId);
+
+  res.sendStatus(201);
+}
+
+async function deleteUser(req: Request, res: Response) {
+  const {id} = req.params
+  const userId = Number(id)
+  await userRepository.Delete(userId);
 
   res.sendStatus(201);
 }
 
 const userController = {
   getUsers,
-  createUser
+  createUser,
+  updateUser,
+  deleteUser
 }
 
 export default userController;
